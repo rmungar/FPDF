@@ -1,19 +1,36 @@
 import fpdf
 
+from pdfs import PDF1, PDF2, PDF3, PDF4, PDF5
+
 class Pdfer():
 
 
     def crearInforme1(self):
-        pass
+        pdf = PDF1()
+        pdf.add_page()
+        pdf.set_title()
+        pdf.set_font('Times', '', 12)
 
     def crearInforme2(self):
-        pass
+        pdf = PDF2()
+        pdf.add_page()
+        pdf.set_title()
+        pdf.set_font('Times', '', 12)
 
     def crearInforme3(self):
-        pass
+        pdf = PDF3()
+        pdf.add_page()
+        pdf.set_title()
+        pdf.set_font('Times', '', 12)
 
     def crearInforme4(self):
-        pass
+        pdf = PDF4()
+        pdf.add_page()
+        pdf.set_title()
+        pdf.set_font('Times', '', 12)
 
     def crearInforme5(self):
-        pass
+        pdf = PDF5()
+        pdf.add_page()
+        pdf.set_title()
+        pdf.set_font('Times', '', 12)
