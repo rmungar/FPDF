@@ -1,6 +1,9 @@
+import sqlite3
 import sys
 import fpdf
 
+from Repository.comentarioRepo import ComentarioRepo
+from Repository.usuarioRepo import UsuarioRepo
 from pdfs import PDF1, PDF2, PDF3, PDF4, PDF5
 from PyQt6.QtWidgets import * # Librerías de los componentes
 from PyQt6 import uic
@@ -17,7 +20,7 @@ class Pdfer(QMainWindow):
         uic.loadUi(f'{basedir}/Ui/informes.ui',self)
 
         self.informe1Button.clicked.connect(self.crearInforme1)
-        ##self.informe2Button.clicked.connect(self.crearInforme2)
+        self.informe2Button.clicked.connect(self.crearInforme2)
         ##self.informe3Button.clicked.connect(self.crearInforme3)
         ##self.informe4Button.clicked.connect(self.crearInforme4)
         ##self.informe5Button.clicked.connect(self.crearInforme5)
@@ -97,17 +100,72 @@ class Pdfer(QMainWindow):
         except:
             QMessageBox.critical(self,'Error', '¡Error al crear el informe 1!')
 
-    ## def crearInforme2(self):
-    ##     body = "Resources\Pdfs\pdf2.md"
-    ##     pdf = PDF2()
-    ##     pdf.add_page()
-    ##     pdf.body(body)
-    ##     pdf.set_font('Times', '', 12)
-    ##     try:
-    ##         pdf.output('informe2.pdf', 'F')
-    ##         QMessageBox.information(self,'Información', '¡Informe 2 creado con éxito!') 
-    ##     except:
-    ##         QMessageBox.critical(self,'Error', '¡Error al crear el informe 2!')
+    def crearInforme2(self):
+
+        email: str = "prueba@gmail.com"
+        anime: str = "Dragon Ball Z"
+
+        usuario_repo = UsuarioRepo()
+        usuario = usuario_repo.getUsuario(email)
+        comentario_repo = ComentarioRepo()
+        comentarios = comentario_repo.getComentariosByUser(self, usuario)
+ 
+        resultado =[]
+        for comentario in comentarios:
+            if comentario._id.__contains__(anime):
+                resultado.append([comentario._id, comentario.usuario, comentario.texto, comentario.fecha])
+
+        introduccion = (
+            "En este documento se detallará la forma de realizar una consulta a la tabla COMENTARIO, "
+            "con el objetivo de obtener la lista de comentarios realizados por un usuario en un anime específico. "
+            "La consulta se centrará en la relación entre la tabla de usuarios y la tabla de comentarios, "
+            "permitiendo así recuperar todos los comentarios realizados por un usuario sobre un anime determinado. "
+        )
+
+        detalle_consulta = (
+            "Para hacer esta consulta, usamos el método `getComentariosByUser` del repositorio de comentarios, "
+            "que nos da todos los comentarios hechos por un usuario en específico. Después, aplicamos un filtro "
+            "para quedarnos solo con los comentarios que están relacionados con el anime que nos interesa. "
+            "Los datos que usamos para la consulta fueron:\n\n"
+            f"- **Email del usuario:** {email}\n"
+            f"- **Nombre del anime:** {anime}\n\n"
+            "**Cómo funciona:**\n"
+            "El método `getComentariosByUser` busca, a través de esta consulta: SELECT * FROM COMENTARIO WHERE USUARIO = ?, todos los comentarios que ha hecho el usuario con el email que le pasamos. "
+            "Luego, filtramos esos comentarios para quedarnos solo con los que tienen el nombre del anime en su identificador (`_id`). "
+            "Esta forma de hacerlo es eficiente y nos permite encontrar rápidamente los comentarios de un usuario sobre un anime en particular."
+        )
+
+        conclusion = (
+            "En resumen, este informe muestra cómo buscamos y filtramos los comentarios que el usuario '{email}' "
+            f"ha hecho sobre el anime '{anime}'. Usamos el método `getComentariosByUser` para obtener todos sus comentarios "
+            "y luego aplicamos un filtro para seleccionar solo los que están relacionados con este anime.\n\n"
+            "Este método es práctico porque reutiliza la lógica del repositorio, lo que hace que el código sea más fácil de mantener "
+            "y ampliar en el futuro. Los resultados que obtuvimos se presentan en este informe, lo que nos ayuda a entender mejor "
+            "cómo interactúa el usuario con el contenido de la plataforma. Esta información es útil para tomar decisiones "
+            "que mejoren la experiencia de los usuarios."
+        )
+
+        headers = ["Id", "Usuario", "Texto", "Fecha"]
+        
+        pdf = PDF2()
+        pdf.add_page()
+        pdf.add_title("Introducción")
+        pdf.body(introduccion)
+        
+        pdf.add_title("Detalles consulta")
+        pdf.body(detalle_consulta)
+
+        pdf.add_title("Resultado de la consulta")
+        pdf.add_results(headers, resultado)
+
+        pdf.add_title("Conclusión")
+        pdf.body(conclusion)
+            
+        try:
+            pdf.output('informe2.pdf', 'F')
+            QMessageBox.information(self,'Información', '¡Informe 2 creado con éxito!') 
+        except:
+            QMessageBox.critical(self,'Error', '¡Error al crear el informe 2!')
 
     ## def crearInforme3(self):
     ##     body = "Resources\Pdfs\pdf3.md"

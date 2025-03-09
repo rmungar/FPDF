@@ -32,6 +32,7 @@ class UsuarioRepo():
         cursor.execute("INSERT INTO USUARIO VALUES (?, ?, ?)", (usuario.nombre, usuario.email, usuario.password))
         conn.commit()
 
+    @staticmethod
     def getUsuario(email) -> Usuario:
         conn = sqlite3.connect('default.db')
         cursor = conn.cursor()
@@ -39,4 +40,4 @@ class UsuarioRepo():
         cursor.execute("SELECT * FROM USUARIO WHERE email = ?", (email,))
         usuarioBD = cursor.fetchone()
 
-        return Usuario(usuarioBD[0], usuarioBD[1], usuarioBD[2], usuarioBD[3], usuarioBD[4], usuarioBD[5], usuarioBD[6], usuarioBD[7])
+        return Usuario(usuarioBD[0], usuarioBD[1], usuarioBD[2], usuarioBD[3], usuarioBD[4])

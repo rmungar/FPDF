@@ -30,7 +30,7 @@ class ComentarioRepo():
         conn.close()
         return comentarios
     
-
+    @staticmethod
     def getComentariosByUser(self, usuario: Usuario) -> list[Comentario]:
 
         from Model.Comentario import Comentario
