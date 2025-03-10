@@ -31,41 +31,21 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.gridLayout = QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.verticalSpacer_5 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayout.addItem(self.verticalSpacer_5, 17, 1, 1, 1)
-
-        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayout.addItem(self.verticalSpacer_4, 18, 1, 1, 1)
-
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout.addItem(self.horizontalSpacer, 0, 3, 1, 1)
-
-        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayout.addItem(self.verticalSpacer_3, 19, 1, 1, 1)
-
-        self.verticalSpacer_6 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayout.addItem(self.verticalSpacer_6, 16, 1, 1, 1)
-
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout.addItem(self.verticalSpacer, 3, 1, 1, 1)
 
-        self.mangaButton = QPushButton(self.centralwidget)
-        self.mangaButton.setObjectName(u"mangaButton")
-        self.mangaButton.setStyleSheet(u"color: rgb(255, 255, 255);")
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.gridLayout.addWidget(self.mangaButton, 6, 1, 1, 1)
+        self.gridLayout.addItem(self.verticalSpacer_2, 22, 1, 1, 1)
 
-        self.animeButton = QPushButton(self.centralwidget)
-        self.animeButton.setObjectName(u"animeButton")
-        self.animeButton.setStyleSheet(u"color: rgb(255, 255, 255);")
+        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.gridLayout.addWidget(self.animeButton, 5, 1, 1, 1)
+        self.gridLayout.addItem(self.verticalSpacer_4, 19, 1, 1, 1)
+
+        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayout.addItem(self.verticalSpacer_3, 21, 1, 1, 1)
 
         self.gridLayout_3 = QGridLayout()
         self.gridLayout_3.setObjectName(u"gridLayout_3")
@@ -444,22 +424,41 @@ class Ui_MainWindow(object):
         self.gridLayout_3.addWidget(self.widget, 0, 0, 1, 1)
 
 
-        self.gridLayout.addLayout(self.gridLayout_3, 3, 2, 18, 3)
+        self.gridLayout.addLayout(self.gridLayout_3, 3, 2, 20, 3)
 
-        self.label = QLabel(self.centralwidget)
-        self.label.setObjectName(u"label")
-        self.label.setStyleSheet(u"font: 24pt \"Pinky Show\";\n"
-"color: rgb(255, 255, 255);")
+        self.verticalSpacer_5 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.gridLayout.addWidget(self.label, 0, 1, 2, 1)
-
-        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayout.addItem(self.verticalSpacer_2, 20, 1, 1, 1)
+        self.gridLayout.addItem(self.verticalSpacer_5, 18, 1, 1, 1)
 
         self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayout.addItem(self.horizontalSpacer_2, 1, 3, 1, 1)
+
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout.addItem(self.horizontalSpacer, 0, 3, 1, 1)
+
+        self.verticalSpacer_6 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayout.addItem(self.verticalSpacer_6, 17, 1, 1, 1)
+
+        self.estudioButton = QPushButton(self.centralwidget)
+        self.estudioButton.setObjectName(u"estudioButton")
+        self.estudioButton.setStyleSheet(u"color: rgb(255, 255, 255);")
+
+        self.gridLayout.addWidget(self.estudioButton, 7, 1, 1, 1)
+
+        self.mangakaButton = QPushButton(self.centralwidget)
+        self.mangakaButton.setObjectName(u"mangakaButton")
+        self.mangakaButton.setStyleSheet(u"color: rgb(255, 255, 255);")
+
+        self.gridLayout.addWidget(self.mangakaButton, 8, 1, 1, 1)
+
+        self.mangaButton = QPushButton(self.centralwidget)
+        self.mangaButton.setObjectName(u"mangaButton")
+        self.mangaButton.setStyleSheet(u"color: rgb(255, 255, 255);")
+
+        self.gridLayout.addWidget(self.mangaButton, 6, 1, 1, 1)
 
         self.userButton = QPushButton(self.centralwidget)
         self.userButton.setObjectName(u"userButton")
@@ -477,17 +476,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.userButton, 0, 4, 2, 1)
 
-        self.mangakaButton = QPushButton(self.centralwidget)
-        self.mangakaButton.setObjectName(u"mangakaButton")
-        self.mangakaButton.setStyleSheet(u"color: rgb(255, 255, 255);")
+        self.animeButton = QPushButton(self.centralwidget)
+        self.animeButton.setObjectName(u"animeButton")
+        self.animeButton.setStyleSheet(u"color: rgb(255, 255, 255);")
 
-        self.gridLayout.addWidget(self.mangakaButton, 8, 1, 1, 1)
+        self.gridLayout.addWidget(self.animeButton, 5, 1, 1, 1)
 
-        self.estudioButton = QPushButton(self.centralwidget)
-        self.estudioButton.setObjectName(u"estudioButton")
-        self.estudioButton.setStyleSheet(u"color: rgb(255, 255, 255);")
+        self.label = QLabel(self.centralwidget)
+        self.label.setObjectName(u"label")
+        self.label.setStyleSheet(u"font: 24pt \"Pinky Show\";\n"
+"color: rgb(255, 255, 255);")
 
-        self.gridLayout.addWidget(self.estudioButton, 7, 1, 1, 1)
+        self.gridLayout.addWidget(self.label, 0, 1, 2, 1)
+
+        self.pushButton = QPushButton(self.centralwidget)
+        self.pushButton.setObjectName(u"pushButton")
+
+        self.gridLayout.addWidget(self.pushButton, 9, 1, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -498,8 +503,6 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.mangaButton.setText(QCoreApplication.translate("MainWindow", u"Mangas", None))
-        self.animeButton.setText(QCoreApplication.translate("MainWindow", u"Animes", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:700;\">Mangakas</span></p></body></html>", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:18pt; font-weight:700;\">Estudios</span></p></body></html>", None))
         self.mangaTop3.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
@@ -516,9 +519,12 @@ class Ui_MainWindow(object):
         self.animeTop3.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
         self.animeTop1.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
         self.animeTop2.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Anigiri</p></body></html>", None))
-        self.userButton.setText("")
-        self.mangakaButton.setText(QCoreApplication.translate("MainWindow", u"Mangakas", None))
         self.estudioButton.setText(QCoreApplication.translate("MainWindow", u"Estudios", None))
+        self.mangakaButton.setText(QCoreApplication.translate("MainWindow", u"Mangakas", None))
+        self.mangaButton.setText(QCoreApplication.translate("MainWindow", u"Mangas", None))
+        self.userButton.setText("")
+        self.animeButton.setText(QCoreApplication.translate("MainWindow", u"Animes", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Anigiri</p></body></html>", None))
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Informes", None))
     # retranslateUi
 
