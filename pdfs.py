@@ -5,18 +5,50 @@ class PDF1(FPDF):
     def header(self):
         path_logo = "LogoAnigiri.jpeg"
         self.image(path_logo, 10, 8, 33)
-        self.cell(0, 10, "Estructura de la Base de Datos", ln=True, align="C")
-        self.ln(20)
+        self.cell(0, 10, "Comentarios de Mangas y Animes de un género específico", ln=True, align="C")
+        self.ln(25)
 
     def body(self, body: str):
         self.set_font('Times', '', 12)
         self.multi_cell(0, 5, body)
+        self.ln(10)
+
+    def add_table(self, title, headers, data):
+        self.set_font("Times", style="B", size=12)
+        self.cell(0, 10, title, ln=True, align="C")
+        self.ln(2)
+
+        col_widths = [40, 30, 30, 80]
+        page_width = self.w  
+        total_width = sum(col_widths)
+        start_x = (page_width - total_width) / 2  
+
+        self.set_x(start_x)
+       
+
+        self.set_font("Arial", size=10)
+        self.set_fill_color(200, 200, 200)
+
+        
+        for i, header in enumerate(headers):
+            self.cell(col_widths[i], 10, header, border=1, align="C", fill=True)
+        self.ln()
+
+        
+        for row in data:
+            self.set_x(start_x)
+            comentario, fecha, titulo, genero = row[0], row[1], row[2], row[3]
+            x, y = self.get_x(), self.get_y()
+            self.multi_cell(col_widths[0], 10, str(comentario), border=1, align="C")  # Comentario
+            self.set_xy(x + col_widths[0], y)
+
+            self.cell(col_widths[1], 10, str(fecha), border=1, align="C")  # Fecha
+            self.cell(col_widths[2], 10, str(titulo), border=1, align="C")  # Título
+            self.cell(col_widths[3], 10, str(genero), border=1, align="C")  # Género
+            self.ln()
+
         self.ln(5)
 
-    def footer(self):
-        self.set_y(-15)
-        self.set_font('Times', '', 12)
-        self.cell(0, 10, 'Page ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
 
 
 class PDF2(FPDF):

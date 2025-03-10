@@ -82,7 +82,7 @@ datosAnimes = [
     ('DBZ-TOEI', 'Dragon Ball Z', 'Goku y sus amigos protegen la Tierra de amenazas cósmicas.', 'Acción, Aventura, Fantasía', 'Toei Animation', 'Resources/Anime/DBZ.jpg', 9, 291, json.dumps([])),
     ('NARUTO-PIERROT', 'Naruto', 'Un joven ninja busca el reconocimiento y sueña con ser Hokage.', 'Acción, Aventura', 'Studio Pierrot', 'Resources/Anime/NARUTO.jpg', 9, 220, json.dumps([('A-Naruto-prueba','prueba@gmail.com','Mala animacion','2025-03-10')])),
     ('AOT-WIT', 'Attack on Titan', 'La humanidad lucha contra titanes devoradores de hombres.', 'Acción, Drama', 'Wit Studio', 'Resources/Anime/AOT.jpg', 4, 87, json.dumps([('A-Attack on Titan-prueba','prueba@gmail.com','No me gusta nada','2025-03-10')])),
-    ('DEATHNOTE-MADHOUSE', 'Death Note', 'Un estudiante encuentra un cuaderno con poderes mortales.', 'Suspense, Misterio', 'Madhouse', 'Resources/Anime/DEATHNOTE.jpg', 1, 37, json.dumps([('A-Death Note-prueba','prueba@gmail.com','Aburrido','2025-03-10')])),
+    ('DEATHNOTE-MADHOUSE', 'Death Note', 'Un estudiante encuentra un cuaderno con poderes mortales.', 'Suspense, Misterio', 'Madhouse', 'Resources/Anime/DEATHNOTE.jpg', 1, 37, json.dumps([])),
     ('HELLSING-GONZO', 'Hellsing', 'Sé testigo de las sangrientas raíces de una leyenda en Hellsing, la serie de acción y terror que impulsó las carreras de algunas de las estrellas más brillantes del anime. El vampiro Arucard y su sirviente Seras Victoria protegen al Imperio Británico de demonios y monstruos satánicos. Juntos, acechan en las sombras como una siniestra fuerza del bien, y esta noche las calles de Inglaterra se llenarán de la sangre de sus presas malvadas.','Acción, Seinen, Sobrenatural, Terror, Vampiros', 'Gonzo','Resources/Anime/HELLSING.jpg', 1, 13, json.dumps([]))
 ]
 datosMangakas = [
@@ -105,7 +105,6 @@ datosComentarios = [
     ('M-Hellsing-prueba','prueba@gmail.com','Lara dice que le gusta','2025-03-10'),
     ('M-Dragon Ball-prueba','prueba@gmail.com','Super es la mejor saga','2025-03-10'),
     ('A-Naruto-prueba','prueba@gmail.com','Mala animacion','2025-03-10'),
-    ('A-Death Note-prueba','prueba@gmail.com','Aburrido','2025-03-10'),
     ('M-One Piece-prueba','prueba@gmail.com','Demasiado largo','2025-03-10')
 ]
 

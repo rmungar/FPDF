@@ -31,16 +31,40 @@ class Pdfer(QMainWindow):
         pdf.set_font('Times', '', 12)
         pdf.add_page()
 
+        descripcion = (
+        "Este informe presenta un análisis de los comentarios realizados sobre mangas y animes "
+        "del género de Acción en la base de datos. Se incluyen detalles como el comentario realizado, "
+        "la fecha en la que fue registrado, el título del contenido y su género.\n"
+        "A continuación, se puede ver la consulta realizada:\n"
+        "\n"
+        """
+        SELECT c.texto AS comentario, c.fecha AS fecha_comentario,
+        COALESCE(m.nombre, a.nombre) AS titulo,
+        COALESCE(m.genero, a.genero) AS genero
+        FROM COMENTARIO c
+        LEFT JOIN MANGA m ON m.comentarios LIKE '%' || c._id || '%' 
+                          AND m.genero LIKE '%Acción%'  
+        LEFT JOIN ANIME a ON a.comentarios LIKE '%' || c._id || '%' 
+                          AND a.genero LIKE '%Acción%' 
+        WHERE c.fecha = '2025-03-10'
+        ORDER BY c.fecha DESC;\n
+        """
+        "\n"
+        "Esta consulta va a acceder a los datos que necesitamos mediante el uso de LEFT JOIN y COALESCE.\n"
+        "COALESCE -> Es una función de SQL que recorrerá todos los valores de una lista de columnas y retornará el primer valor no nulo de esta.\n"
+        "LEFT JOIN -> Es una función de SQL que unirá dos tablas que devolverá todos los registros de la tabla izquiera y aquellos que coincidan de la derecha.\n"
+        )
+
+
+
+        pdf.body(descripcion)
+
         conn = sqlite3.connect('default.db')
         cursor = conn.cursor()
         consulta = """
-        SELECT c._id AS id_comentario, c.usuario AS usuario, c.texto AS comentario, c.fecha AS fecha_comentario,
+        SELECT c.texto AS comentario, c.fecha AS fecha_comentario,
         COALESCE(m.nombre, a.nombre) AS titulo,
-        COALESCE(m.genero, a.genero) AS genero,
-        CASE 
-            WHEN m._id IS NOT NULL THEN 'MANGA'
-            WHEN a._id IS NOT NULL THEN 'ANIME'
-        END AS tipo_contenido
+        COALESCE(m.genero, a.genero) AS genero
         FROM COMENTARIO c
         LEFT JOIN MANGA m ON m.comentarios LIKE '%' || c._id || '%' 
                           AND m.genero LIKE '%Acción%'  
@@ -50,10 +74,14 @@ class Pdfer(QMainWindow):
         ORDER BY c.fecha DESC;
         """
         cursor.execute(consulta)
-        print(cursor.fetchall())
-        
+        results = cursor.fetchall()
+        headers = ["Comentario", "Fecha", "Título", "Género"]
+        print(results)
 
-        pdf.body("")
+        titulo = "Comentarios de Mangas y Animes con el género Acción"
+        
+        pdf.add_table(titulo, headers, results)
+        
         
         try:
             pdf.output('informe1.pdf', 'F')
