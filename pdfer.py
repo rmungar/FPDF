@@ -61,7 +61,7 @@ class Pdfer(QMainWindow):
         usuario_repo = UsuarioRepo()
         usuario = usuario_repo.getUsuario(email)
         comentario_repo = ComentarioRepo()
-        comentarios = comentario_repo.getComentariosByUser(self, usuario)
+        comentarios = comentario_repo.getComentariosByUser(usuario)
  
         resultado =[]
         for comentario in comentarios:

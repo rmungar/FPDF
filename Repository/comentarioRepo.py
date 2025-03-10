@@ -31,7 +31,7 @@ class ComentarioRepo():
         return comentarios
     
     @staticmethod
-    def getComentariosByUser(self, usuario: Usuario) -> list[Comentario]:
+    def getComentariosByUser(usuario: Usuario) -> list[Comentario]:
 
         from Model.Comentario import Comentario
 
