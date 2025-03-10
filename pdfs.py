@@ -13,27 +13,6 @@ class PDF1(FPDF):
         self.multi_cell(0, 5, body)
         self.ln(5)
 
-    def add_table(self, title, headers, data):
-        self.set_font('Times', '', 10)
-        self.cell(0, 10, title, ln=True, align="L")
-        self.ln()
-        
-        col_widths = [50, 50, 90]
-        self.set_font('Times', '', 10)
-        self.set_fill_color(200, 200, 200)
-        
-        for i, header in enumerate(headers):
-            self.cell(col_widths[i], 10, header, border=1, align="C", fill=True)
-        self.ln()
-        
-        for row in data:
-            for i, item in enumerate(row):
-                self.cell(col_widths[i], 10, str(item), border=1, align="C")
-            self.ln()
-        
-        self.ln(5)
-
-
     def footer(self):
         self.set_y(-15)
         self.set_font('Times', '', 12)

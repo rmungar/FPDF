@@ -75,25 +75,29 @@ datosMangas = [
     ('ONE-ODA', 'One Piece', 'One Piece es un manga japonés escrito e ilustrado por Eiichirō Oda. Comenzó a publicarse en la revista Weekly Shōnen Jump el 22 de julio de 1997.', 'Aventura, Acción, Comedia, Drama, Fantasía', 'Eiichirō Oda', 'Resources/Manga/OP.jpg', 98, 1000, json.dumps([])),
     ('NAR-KIS', 'Naruto', 'Naruto es un manga japonés escrito e ilustrado por Masashi Kishimoto. Comenzó a publicarse en la revista Weekly Shōnen Jump el 21 de septiembre de 1999.', 'Aventura, Acción, Comedia, Drama, Fantasía', 'Masashi Kishimoto', 'Resources/Manga/NARUTO.jpg', 72, 700, json.dumps([])),
     ('DRA-AKI', 'Dragon Ball', 'Dragon Ball es un manga japonés escrito e ilustrado por Akira Toriyama. Comenzó a publicarse en la revista Weekly Shōnen Jump el 3 de diciembre de 1984.', 'Aventura, Acción, Comedia, Drama, Fantasía', 'Akira Toriyama', 'Resources/Manga/DBZ.jpg', 42, 520, json.dumps([])),
-    ('BLE-TIT', 'Bleach', 'Bleach es un manga japonés escrito e ilustrado por Tite Kubo. Comenzó a publicarse en la revista Weekly Shōnen Jump el 7 de agosto de 2001.', 'Aventura, Acción, Comedia, Drama, Fantasía', 'Tite Kubo', 'Resources/Manga/BLEACH.jpg', 74, 686, json.dumps([]))
+    ('BLE-TIT', 'Bleach', 'Bleach es un manga japonés escrito e ilustrado por Tite Kubo. Comenzó a publicarse en la revista Weekly Shōnen Jump el 7 de agosto de 2001.', 'Aventura, Acción, Comedia, Drama, Fantasía', 'Tite Kubo', 'Resources/Manga/BLEACH.jpg', 74, 686, json.dumps([])),
+    ('HEL-GON','Hellsing','Sé testigo de las sangrientas raíces de una leyenda en Hellsing. El vampiro Arucard y su sirviente Seras Victoria protegen al Imperio Británico de demonios y monstruos satánicos. Juntos, acechan en las sombras como una siniestra fuerza del bien, y esta noche las calles de Inglaterra se llenarán de la sangre de sus presas malvadas.', 'Acción, Seinen, Sobrenatural, Terror, Vampiros','Kōta Hirano', 'Resources/Manga/HELLSING.jpg', 10, 92, json.dumps([]))
 ]
 datosAnimes = [
     ('DBZ-TOEI', 'Dragon Ball Z', 'Goku y sus amigos protegen la Tierra de amenazas cósmicas.', 'Acción, Aventura, Fantasía', 'Toei Animation', 'Resources/Anime/DBZ.jpg', 9, 291, json.dumps([])),
     ('NARUTO-PIERROT', 'Naruto', 'Un joven ninja busca el reconocimiento y sueña con ser Hokage.', 'Acción, Aventura', 'Studio Pierrot', 'Resources/Anime/NARUTO.jpg', 9, 220, json.dumps([])),
     ('AOT-WIT', 'Attack on Titan', 'La humanidad lucha contra titanes devoradores de hombres.', 'Acción, Drama', 'Wit Studio', 'Resources/Anime/AOT.jpg', 4, 87, json.dumps([])),
-    ('DEATHNOTE-MADHOUSE', 'Death Note', 'Un estudiante encuentra un cuaderno con poderes mortales.', 'Suspense, Misterio', 'Madhouse', 'Resources/Anime/DEATHNOTE.jpg', 1, 37, json.dumps([]))
+    ('DEATHNOTE-MADHOUSE', 'Death Note', 'Un estudiante encuentra un cuaderno con poderes mortales.', 'Suspense, Misterio', 'Madhouse', 'Resources/Anime/DEATHNOTE.jpg', 1, 37, json.dumps([])),
+    ('HELLSING-GONZO', 'Hellsing', 'Sé testigo de las sangrientas raíces de una leyenda en Hellsing, la serie de acción y terror que impulsó las carreras de algunas de las estrellas más brillantes del anime. El vampiro Arucard y su sirviente Seras Victoria protegen al Imperio Británico de demonios y monstruos satánicos. Juntos, acechan en las sombras como una siniestra fuerza del bien, y esta noche las calles de Inglaterra se llenarán de la sangre de sus presas malvadas.','Acción, Seinen, Sobrenatural, Terror, Vampiros', 'Gonzo','Resources/Anime/HELLSING.jpg', 1, 13, json.dumps([]))
 ]
 datosMangakas = [
     ('Eiichiro Oda', 'Eiichiro Oda', '1975-01-01', 'Japonesa', 'Resources/Mangaka/ODA.jpg', '["One Piece"]'),
     ('Masashi Kishimoto', 'Masashi Kishimoto', '1974-11-08', 'Japonesa', 'Resources/Mangaka/KISHIMOTO.jpg', '["Naruto", "Boruto"]'),
     ('Hajime Isayama', 'Hajime Isayama', '1986-08-29', 'Japonesa', 'Resources/Mangaka/ISAYAMA.jpg', '["Attack on Titan"]'),
-    ('Tite Kubo', 'Tite Kubo', '1977-06-26', 'Japonesa', 'Resources/Mangaka/KUBO.jpg', '["Bleach"]')
+    ('Tite Kubo', 'Tite Kubo', '1977-06-26', 'Japonesa', 'Resources/Mangaka/KUBO.jpg', '["Bleach"]'),
+    ('Kōta Hirano', 'Kōta Hirano', '1973-07-14', 'Japonesa','Resources/Mangaka/HIRANO.jpg','[Hellsing]')
 ]
 datosEstudios = [
     ('Toei Animation', 'Japón', 'Resources/Estudios/TOEI.png', '["Dragon Ball Z", "One Piece"]'),
     ('Studio Pierrot', 'Japón', 'Resources/Estudios/PIERROT.jpg', '["Naruto", "Bleach"]'),
     ('Wit Studio', 'Japón', 'Resources/Estudios/WIT.jpg', '["Attack on Titan", "Vinland Saga"]'),
-    ('Madhouse', 'Japón', 'Resources/Estudios/MADHOUSE.png', '["Death Note", "One Punch Man"]')
+    ('Madhouse', 'Japón', 'Resources/Estudios/MADHOUSE.png', '["Death Note", "One Punch Man"]'),
+    ('Gonzo','Japón','Resources/Estudios/GONZO.jpg','[Hellsing]')
 ]
 
 

@@ -1,7 +1,6 @@
 import sqlite3
 import sys
 import fpdf
-
 from Repository.animeRepo import AnimeRepo
 from Repository.comentarioRepo import ComentarioRepo
 from Repository.usuarioRepo import UsuarioRepo
@@ -31,59 +30,9 @@ class Pdfer(QMainWindow):
         pdf = PDF1()
         pdf.set_font('Times', '', 12)
         pdf.add_page()
-        
-        estructuras = [
-            ("Tabla: USUARIO", ["Campo", "Tipo", "Descripción"], [
-                ["_id", "VARCHAR(255) PK", "Identificador único del usuario."],
-                ["nombre", "VARCHAR(255) NOT NULL", "Nombre del usuario (clave primaria)."],
-                ["passwd", "VARCHAR(255) NOT NULL", "Contraseña del usuario."],
-                ["email", "VARCHAR(255) NOT NULL", "Correo electrónico del usuario."],
-                ["comentarios", "JSON", "Almacena los comentarios en formato JSON."],
-                ["favoritos", "JSON", "Almacena los favoritos en formato JSON."],
-            ]),
-            ("Tabla: MANGA", ["Campo", "Tipo", "Descripción"], [
-                ["_id", "VARCHAR(255) PK", "Identificador único del manga."],
-                ["nombre", "VARCHAR(255) NOT NULL", "Nombre del manga."],
-                ["sinopsis", "VARCHAR(255) NOT NULL", "Sinopsis breve del manga."],
-                ["genero", "VARCHAR(255) NOT NULL", "Género del manga."],
-                ["autor", "VARCHAR(255) NOT NULL", "Autor del manga."],
-                ["imagen", "VARCHAR(255) NOT NULL", "URL de la imagen del manga."],
-                ["tomos", "INTEGER NOT NULL", "Número de tomos del manga."],
-                ["capitulos", "INTEGER NOT NULL", "Número de capítulos del manga."],
-                ["comentarios", "TEXT", "Comentarios sobre el manga."],
-            ]),
-            ("Tabla: ANIME", ["Campo", "Tipo", "Descripción"], [
-                ["_id", "VARCHAR(255) PK", "Identificador único del anime."],
-                ["nombre", "VARCHAR(255) NOT NULL", "Nombre del anime."],
-                ["sinopsis", "TEXT NOT NULL", "Sinopsis detallada del anime."],
-                ["genero", "VARCHAR(255) NOT NULL", "Género del anime."],
-                ["estudio", "VARCHAR(255) NOT NULL", "Estudio de animación."],
-                ["imagen", "VARCHAR(255) NOT NULL", "URL de la imagen del anime."],
-                ["temporadas", "INTEGER NOT NULL", "Número de temporadas."],
-                ["capitulos", "INTEGER NOT NULL", "Número de capítulos."],
-                ["comentarios", "JSON", "Comentarios en formato JSON."],
-            ]),
-            ("Tabla: MANGAKA", ["Campo", "Tipo", "Descripción"], [
-                ["_id", "VARCHAR(255) PK", "Identificador único del mangaka."],
-                ["nombre", "VARCHAR(255) NOT NULL", "Nombre del mangaka."],
-                ["nacimiento", "DATE NOT NULL", "Fecha de nacimiento del mangaka."],
-                ["nacionalidad", "VARCHAR(255) NOT NULL", "Nacionalidad del mangaka."],
-                ["imagen", "VARCHAR(255) NOT NULL", "URL de la imagen del mangaka."],
-                ["obras", "JSON", "Lista de obras en formato JSON."],
-            ]),
-            ("Tabla: ESTUDIO", ["Campo", "Tipo", "Descripción"], [
-                ["nombre", "VARCHAR(255) PK", "Nombre del estudio de animación."],
-                ["pais", "VARCHAR(255) NOT NULL", "País de origen."],
-                ["imagen", "VARCHAR(255) NOT NULL", "URL de la imagen del estudio."],
-                ["animes", "JSON", "Lista de animes producidos en formato JSON."],
-            ]),
-            ("Tabla: COMENTARIO", ["Campo", "Tipo", "Descripción"], [
-                ["_id", "VARCHAR(255) PK", "Identificador único del comentario."],
-                ["usuario", "VARCHAR(255) NOT NULL", "Usuario que realiza el comentario."],
-                ["texto", "TEXT NOT NULL", "Contenido del comentario."],
-                ["fecha", "VARCHAR(255) NOT NULL", "Fecha del comentario."],
-            ]),
-        ]
+         
+
+       
         body = (
             "Este documento contiene información relacionada con la estructura de la base de datos utilizada en la aplicación. "
             "A continuación, se detallan los elementos de la base de datos, sus relaciones y cómo se gestionan los datos "
@@ -92,8 +41,7 @@ class Pdfer(QMainWindow):
         )
         pdf.body(body)
 
-        for title, headers, data in estructuras:
-            pdf.add_table(title, headers, data)
+        
         
         try:
             pdf.output('informe1.pdf', 'F')
