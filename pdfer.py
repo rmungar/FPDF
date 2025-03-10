@@ -31,18 +31,18 @@ class Pdfer(QMainWindow):
         pdf.set_font('Times', '', 12)
         pdf.add_page()
 
-
+        conn = sqlite3.connect('default.db')
+        cursor = conn.cursor()
         consulta = """
-        SELECT c._id, c.usuario, c.texto, c.fecha, 
-        m.nombre AS nombre_manga, a.nombre AS nombre_anime
+        SELECT c._id, c.usuario, c.texto, c.fecha, m.nombre AS nombre_manga, a.nombre AS nombre_anime
         FROM COMENTARIO c
         LEFT JOIN MANGA m ON c._id = m._id
         LEFT JOIN ANIME a ON c._id = a._id
         WHERE (m.genero = 'Género_Especifico' OR a.genero = 'Género_Especifico')
         AND c.fecha = 'YYYY-MM-DD';
         """
-
-       
+        cursor.execute(consulta)
+        print(cursor.fetchall())
         
 
         pdf.body("")
