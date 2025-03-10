@@ -3,20 +3,22 @@ from fpdf import FPDF
 
 class PDF1(FPDF):
     def header(self):
+        path_logo = "logo.png"
+        self.image(path_logo, 10, 8, 33)
         self.cell(0, 10, "Estructura de la Base de Datos", ln=True, align="C")
-        self.ln(5)
+        self.ln(20)
 
     def body(self, body: str):
         self.set_font('Times', '', 12)
         self.multi_cell(0, 5, body)
         self.ln(5)
     def add_table(self, title, headers, data):
-        self.set_font('Times', '', 12)
+        self.set_font('Times', '', 10)
         self.cell(0, 10, title, ln=True, align="L")
         self.ln()
         
         col_widths = [50, 50, 90]
-        self.set_font("Arial", size=10)
+        self.set_font('Times', '', 10)
         self.set_fill_color(200, 200, 200)
         
         for i, header in enumerate(headers):

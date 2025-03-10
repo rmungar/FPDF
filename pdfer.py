@@ -34,6 +34,7 @@ class Pdfer(QMainWindow):
         
         estructuras = [
             ("Tabla: USUARIO", ["Campo", "Tipo", "Descripción"], [
+                ["_id", "VARCHAR(255) PK", "Identificador único del usuario."],
                 ["nombre", "VARCHAR(255) NOT NULL", "Nombre del usuario (clave primaria)."],
                 ["passwd", "VARCHAR(255) NOT NULL", "Contraseña del usuario."],
                 ["email", "VARCHAR(255) NOT NULL", "Correo electrónico del usuario."],
@@ -41,7 +42,7 @@ class Pdfer(QMainWindow):
                 ["favoritos", "JSON", "Almacena los favoritos en formato JSON."],
             ]),
             ("Tabla: MANGA", ["Campo", "Tipo", "Descripción"], [
-                ["_id", "VARCHAR(255) PRIMARY KEY", "Identificador único del manga."],
+                ["_id", "VARCHAR(255) PK", "Identificador único del manga."],
                 ["nombre", "VARCHAR(255) NOT NULL", "Nombre del manga."],
                 ["sinopsis", "VARCHAR(255) NOT NULL", "Sinopsis breve del manga."],
                 ["genero", "VARCHAR(255) NOT NULL", "Género del manga."],
@@ -52,7 +53,7 @@ class Pdfer(QMainWindow):
                 ["comentarios", "TEXT", "Comentarios sobre el manga."],
             ]),
             ("Tabla: ANIME", ["Campo", "Tipo", "Descripción"], [
-                ["_id", "VARCHAR(255) PRIMARY KEY", "Identificador único del anime."],
+                ["_id", "VARCHAR(255) PK", "Identificador único del anime."],
                 ["nombre", "VARCHAR(255) NOT NULL", "Nombre del anime."],
                 ["sinopsis", "TEXT NOT NULL", "Sinopsis detallada del anime."],
                 ["genero", "VARCHAR(255) NOT NULL", "Género del anime."],
@@ -63,7 +64,7 @@ class Pdfer(QMainWindow):
                 ["comentarios", "JSON", "Comentarios en formato JSON."],
             ]),
             ("Tabla: MANGAKA", ["Campo", "Tipo", "Descripción"], [
-                ["_id", "VARCHAR(255) PRIMARY KEY", "Identificador único del mangaka."],
+                ["_id", "VARCHAR(255) PK", "Identificador único del mangaka."],
                 ["nombre", "VARCHAR(255) NOT NULL", "Nombre del mangaka."],
                 ["nacimiento", "DATE NOT NULL", "Fecha de nacimiento del mangaka."],
                 ["nacionalidad", "VARCHAR(255) NOT NULL", "Nacionalidad del mangaka."],
@@ -71,13 +72,13 @@ class Pdfer(QMainWindow):
                 ["obras", "JSON", "Lista de obras en formato JSON."],
             ]),
             ("Tabla: ESTUDIO", ["Campo", "Tipo", "Descripción"], [
-                ["nombre", "VARCHAR(255) PRIMARY KEY", "Nombre del estudio de animación."],
+                ["nombre", "VARCHAR(255) PK", "Nombre del estudio de animación."],
                 ["pais", "VARCHAR(255) NOT NULL", "País de origen."],
                 ["imagen", "VARCHAR(255) NOT NULL", "URL de la imagen del estudio."],
                 ["animes", "JSON", "Lista de animes producidos en formato JSON."],
             ]),
             ("Tabla: COMENTARIO", ["Campo", "Tipo", "Descripción"], [
-                ["_id", "VARCHAR(255) PRIMARY KEY", "Identificador único del comentario."],
+                ["_id", "VARCHAR(255) PK", "Identificador único del comentario."],
                 ["usuario", "VARCHAR(255) NOT NULL", "Usuario que realiza el comentario."],
                 ["texto", "TEXT NOT NULL", "Contenido del comentario."],
                 ["fecha", "VARCHAR(255) NOT NULL", "Fecha del comentario."],
