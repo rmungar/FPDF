@@ -22,7 +22,7 @@ class Pdfer(QMainWindow):
         self.informe1Button.clicked.connect(self.crearInforme1)
         self.informe2Button.clicked.connect(self.crearInforme2)
         ##self.informe3Button.clicked.connect(self.crearInforme3)
-        ##self.informe4Button.clicked.connect(self.crearInforme4)
+        self.informe4Button.clicked.connect(self.crearInforme4)
         ##self.informe5Button.clicked.connect(self.crearInforme5)
 
     def crearInforme1(self):
@@ -179,17 +179,74 @@ class Pdfer(QMainWindow):
     ##     except:
     ##         QMessageBox.critical(self,'Error', '¡Error al crear el informe 3!')
 
-    ## def crearInforme4(self):
-    ##     body = "Resources\Pdfs\pdf4.md"
-    ##     pdf = PDF4()
-    ##     pdf.add_page()
-    ##     pdf.body(body)
-    ##     pdf.set_font('Times', '', 12)
-    ##     try:
-    ##         pdf.output('informe3.pdf', 'F')
-    ##         QMessageBox.information(self,'Información', '¡Informe 4 creado con éxito!') 
-    ##     except:
-    ##         QMessageBox.critical(self,'Error', '¡Error al crear el informe 4!')
+    def crearInforme4(self):
+        # Conectar a la base de datos
+        conn = sqlite3.connect('default.db')
+        cursor = conn.cursor()
+
+        # Consulta SQL para obtener los datos de la tabla ESTUDIO
+        query = "SELECT nombre, pais, animes FROM ESTUDIO"
+        cursor.execute(query)
+        datos_estudios = cursor.fetchall()
+
+        # Obtener estadísticas adicionales
+        cursor.execute("SELECT COUNT(*) FROM ESTUDIO")
+        total_estudios = cursor.fetchone()[0]
+
+        cursor.execute("SELECT COUNT(DISTINCT pais) FROM ESTUDIO")
+        total_paises = cursor.fetchone()[0]
+
+        # Cerrar la conexión a la base de datos
+        conn.close()
+
+        # Crear el PDF
+        pdf = PDF4()
+        pdf.set_font('Times', '', 12)
+        pdf.add_page()
+
+        # Introducción
+        introduccion = (
+            "Este informe detalla la información sobre los estudios de animación registrados en la base de datos. "
+            "Incluye la estructura de la tabla ESTUDIO y los datos de los estudios almacenados, mostrando su país de origen "
+            "y las producciones más destacadas. A continuación, se presentan los datos recopilados junto con algunas estadísticas."
+        )
+        pdf.body_text(introduccion)
+
+        # Estadísticas
+        estadisticas = (
+            f"Estadísticas:\n"
+            f"- Número total de estudios: {total_estudios}\n"
+            f"- Número total de países: {total_paises}\n"
+        )
+        pdf.body_text(estadisticas)
+
+        # Datos de la tabla
+        datos_convertidos = []
+        for estudio in datos_estudios:
+            nombre = estudio[0]
+            pais = estudio[1]
+            animes_raw = estudio[2]
+
+            animes = animes_raw.replace("[", "").replace("]", "").replace('"', "").strip()
+
+            datos_convertidos.append([nombre, pais, animes])
+
+        pdf.body("Datos de los estudios:", ["Nombre", "País", "Animes"], datos_convertidos)
+
+        # Conclusiones
+        conclusiones = (
+            "Conclusiones:\n"
+            "Este informe muestra que la mayoría de los estudios de animación están ubicados en Japón, "
+            "lo que refleja la importancia de este país en la industria de la animación. Además, se observa que "
+            "cada estudio tiene una lista diversa de producciones destacadas."
+        )
+        pdf.body_text(conclusiones)
+
+        try:
+            pdf.output('informe4.pdf', 'F')
+            QMessageBox.information(self, 'Información', '¡Informe 4 creado con éxito!')
+        except Exception as e:
+            QMessageBox.critical(self, 'Error', f'¡Error al crear el informe 4! Detalles: {str(e)}')
 
     ## def crearInforme5(self):
     ##     body = "Resources\Pdfs\pdf5.md"
