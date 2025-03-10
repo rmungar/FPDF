@@ -30,18 +30,14 @@ class Pdfer(QMainWindow):
         pdf = PDF1()
         pdf.set_font('Times', '', 12)
         pdf.add_page()
-         
 
-       
-        body = (
-            "Este documento contiene información relacionada con la estructura de la base de datos utilizada en la aplicación. "
-            "A continuación, se detallan los elementos de la base de datos, sus relaciones y cómo se gestionan los datos "
-            "en la aplicación. Este informe proporciona una visión general de cómo los datos se almacenan y organizan "
-            "para su manipulación eficiente."
-        )
-        pdf.body(body)
 
         
+
+       
+        
+
+        pdf.body("")
         
         try:
             pdf.output('informe1.pdf', 'F')
