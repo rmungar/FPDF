@@ -12,6 +12,7 @@ class PDF1(FPDF):
         self.set_font('Times', '', 12)
         self.multi_cell(0, 5, body)
         self.ln(5)
+
     def add_table(self, title, headers, data):
         self.set_font('Times', '', 10)
         self.cell(0, 10, title, ln=True, align="L")
@@ -34,6 +35,7 @@ class PDF1(FPDF):
 
 
     def footer(self):
+        self.set_y(-15)
         self.set_font('Times', '', 12)
         self.cell(0, 10, 'Page ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
 

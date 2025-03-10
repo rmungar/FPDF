@@ -94,7 +94,6 @@ class Pdfer(QMainWindow):
 
         for title, headers, data in estructuras:
             pdf.add_table(title, headers, data)
-
         
         try:
             pdf.output('informe1.pdf', 'F')
@@ -229,7 +228,8 @@ class Pdfer(QMainWindow):
             QMessageBox.information(self, 'Información', '¡Informe 3 creado con éxito!')
         except:
             QMessageBox.critical(self, 'Error', '¡Error al crear el informe 3!')
-#_______________________________________________________________________________________________________________________
+
+
     def crearInforme4(self):
         # Conectar a la base de datos
         conn = sqlite3.connect('default.db')
