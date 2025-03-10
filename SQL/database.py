@@ -100,12 +100,23 @@ datosEstudios = [
     ('Gonzo','Japón','Resources/Estudios/GONZO.jpg','[Hellsing]')
 ]
 
+datosComentarios = [
+    ('A-Attack on Titan-prueba','prueba@gmail.com','No me gusta nada','2025-03-10'),
+    ('M-Hellsing-prueba','prueba@gmail.com','Lara dice que le gusta','2025-03-10'),
+    ('M-Dragon Ball-prueba','prueba@gmail.com','Super es la mejor saga','2025-03-10'),
+    ('A-Naruto-prueba','prueba@gmail.com','Mala animacion','2025-03-10'),
+    ('A-Death Note-prueba','prueba@gmail.com','Aburrido','2025-03-10'),
+    ('M-One Piece-prueba','prueba@gmail.com','Demasiado largo','2025-03-10')
+]
+
+
 
 cursor.executemany("INSERT INTO USUARIO (nombre, passwd, email, comentarios, favoritos) VALUES (?, ?, ?, ?, ?)", datosUsuarios)
 cursor.executemany("INSERT INTO MANGA (_id, nombre, sinopsis, genero, autor, imagen, tomos, capitulos, comentarios) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", datosMangas)
 cursor.executemany("INSERT INTO ANIME (_id, nombre, sinopsis, genero, estudio, imagen, temporadas, capitulos, comentarios) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", datosAnimes)
 cursor.executemany("INSERT INTO MANGAKA (_id, nombre, nacimiento, nacionalidad, imagen, obras) VALUES (?, ?, ?, ?, ?, ?)", datosMangakas)
 cursor.executemany("INSERT INTO ESTUDIO (nombre, pais, imagen, animes) VALUES (?, ?, ?, ?)", datosEstudios)
+cursor.executemany("INSERT INTO COMENTARIO (_id, usuario, texto, fecha) VALUES (?, ?, ?, ?)", datosComentarios)
 
 
 cursor.execute("SELECT * FROM MANGA")
