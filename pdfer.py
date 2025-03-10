@@ -34,12 +34,20 @@ class Pdfer(QMainWindow):
         conn = sqlite3.connect('default.db')
         cursor = conn.cursor()
         consulta = """
-        SELECT c._id, c.usuario, c.texto, c.fecha, m.nombre AS nombre_manga, a.nombre AS nombre_anime
+        SELECT c._id AS id_comentario, c.usuario AS usuario, c.texto AS comentario, c.fecha AS fecha_comentario,
+        COALESCE(m.nombre, a.nombre) AS titulo,
+        COALESCE(m.genero, a.genero) AS genero,
+        CASE 
+            WHEN m._id IS NOT NULL THEN 'MANGA'
+            WHEN a._id IS NOT NULL THEN 'ANIME'
+        END AS tipo_contenido
         FROM COMENTARIO c
-        LEFT JOIN MANGA m ON c._id = m._id
-        LEFT JOIN ANIME a ON c._id = a._id
-        WHERE (m.genero = 'Género_Especifico' OR a.genero = 'Género_Especifico')
-        AND c.fecha = 'YYYY-MM-DD';
+        LEFT JOIN MANGA m ON m.comentarios LIKE '%' || c._id || '%' 
+                          AND m.genero LIKE '%Acción%'  
+        LEFT JOIN ANIME a ON a.comentarios LIKE '%' || c._id || '%' 
+                          AND a.genero LIKE '%Acción%' 
+        WHERE c.fecha = '2025-03-10'
+        ORDER BY c.fecha DESC;
         """
         cursor.execute(consulta)
         print(cursor.fetchall())
