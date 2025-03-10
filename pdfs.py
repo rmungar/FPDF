@@ -3,7 +3,7 @@ from fpdf import FPDF
 
 class PDF1(FPDF):
     def header(self):
-        path_logo = "logo.png"
+        path_logo = "LogoAnigiri.jpeg"
         self.image(path_logo, 10, 8, 33)
         self.cell(0, 10, "Estructura de la Base de Datos", ln=True, align="C")
         self.ln(20)
@@ -21,7 +21,7 @@ class PDF1(FPDF):
 
 class PDF2(FPDF):
     def header(self):
-        path_logo = "logo.png"
+        path_logo = "LogoAnigiri.jpeg"
         self.image(path_logo, 10, 8, 33)
         self.set_font('Arial', 'B', 15)
         self.cell(80)
@@ -60,7 +60,7 @@ class PDF2(FPDF):
 
 class PDF3(FPDF):
     def header(self):
-        path_logo = "logo.png"
+        path_logo = "LogoAnigiri.jpeg"
         self.image(path_logo, 10, 8, 33)
         self.set_font('Arial', 'B', 15)
         self.cell(80)
@@ -102,7 +102,7 @@ class PDF3(FPDF):
 class PDF4(FPDF):
     def header(self):
         # Añadir el logo en la parte superior izquierda
-        self.image('logo.png', x=10, y=10, w=30)  # Ajusta las coordenadas (x, y) y el tamaño (w) según sea necesario
+        self.image('LogoAnigiri.jpeg', x=10, y=10, w=30)  # Ajusta las coordenadas (x, y) y el tamaño (w) según sea necesario
 
         # Título del informe
         self.set_font('Times', 'B', 14)
