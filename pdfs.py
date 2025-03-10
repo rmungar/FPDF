@@ -77,17 +77,44 @@ class PDF2(FPDF):
 
 class PDF3(FPDF):
     def header(self):
-        self.set_font('Times', '', 12)
+        path_logo = "logo.png"
+        self.image(path_logo, 10, 8, 33)
+        self.set_font('Arial', 'B', 15)
+        self.cell(80)
+        self.cell(30, 10, 'Informe de Anime', ln=True, align="C")
+        self.ln(20)
+        self.alias_nb_pages()
 
-    def body(self, body):
-        with open(body, 'rb') as fh:
-            txt = fh.read().decode('latin-1')
+    def add_title(self, title):
+        self.set_font('Arial', 'B', 14)
+        self.cell(0, 10, title, ln=True, align="C")
+        self.ln(5)
+
+    def body(self, text):
         self.set_font('Times', '', 12)
-        self.multi_cell(0, 5, txt)
+        self.multi_cell(0, 5, text, align="L")
+        self.ln(10)
+
+    def add_table(self, headers, data):
+        self.set_font('Arial', 'B', 10)
+        self.set_fill_color(200, 200, 200)
+
+        col_widths = [40, 150]  
+        for i, header in enumerate(headers):
+            self.cell(col_widths[i], 10, header, border=1, align="C", fill=True)
+        self.ln()
+
+        self.set_font("Arial", '', 10)
+        for row in data:
+            for i, item in enumerate(row):
+                self.cell(col_widths[i], 10, str(item), border=1, align="C")
+            self.ln()
+        self.ln(5)
 
     def footer(self):
+        self.set_y(-15)
         self.set_font('Times', '', 12)
-        self.cell(0, 10, 'Page ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
+        self.cell(0, 10, 'Página ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
 
 class PDF4(FPDF):
     def header(self):

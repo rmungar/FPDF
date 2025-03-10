@@ -2,6 +2,7 @@ import sqlite3
 import sys
 import fpdf
 
+from Repository.animeRepo import AnimeRepo
 from Repository.comentarioRepo import ComentarioRepo
 from Repository.usuarioRepo import UsuarioRepo
 from pdfs import PDF1, PDF2, PDF3, PDF4, PDF5
@@ -21,7 +22,7 @@ class Pdfer(QMainWindow):
 
         self.informe1Button.clicked.connect(self.crearInforme1)
         self.informe2Button.clicked.connect(self.crearInforme2)
-        ##self.informe3Button.clicked.connect(self.crearInforme3)
+        self.informe3Button.clicked.connect(self.crearInforme3)
         self.informe4Button.clicked.connect(self.crearInforme4)
         ##self.informe5Button.clicked.connect(self.crearInforme5)
 
@@ -166,19 +167,68 @@ class Pdfer(QMainWindow):
             QMessageBox.information(self,'Información', '¡Informe 2 creado con éxito!') 
         except:
             QMessageBox.critical(self,'Error', '¡Error al crear el informe 2!')
+#_______________________________________________________________________________________________________________________
+    def crearInforme3(self):
+        anime_name = "Attack on Titan"
+        anime_repo = AnimeRepo()
+        animes = anime_repo.getAnime()
+        
 
-    ## def crearInforme3(self):
-    ##     body = "Resources\Pdfs\pdf3.md"
-    ##     pdf = PDF3()
-    ##     pdf.add_page()
-    ##     pdf.body(body)
-    ##     pdf.set_font('Times', '', 12)
-    ##     try:
-    ##         pdf.output('informe3.pdf', 'F')
-    ##         QMessageBox.information(self,'Información', '¡Informe 3 creado con éxito!') 
-    ##     except:
-    ##         QMessageBox.critical(self,'Error', '¡Error al crear el informe 3!')
+        anime = next((anime for anime in animes if anime.getNombre() == anime_name), None)
 
+        anime_icon = anime.imagen
+
+        if not anime:
+            QMessageBox.critical(self, 'Error', f'¡No se encontró el anime "{anime_name}" en la base de datos!')
+            return
+
+        introduccion = (
+            f"En este informe se detallará la información concreta de un anime en específico, en este caso: {anime_name}. "
+            "Para mostrar el cómo realizar la consulta que nos permita obtener los detalles de un anime en particular, "
+            "para poder hacer uso de su información."
+        )
+
+        detalles_anime = [
+            ["Nombre", anime.getNombre()],
+            ["Sinopsis", anime.getSinopsis()],
+            ["Género", anime.getGenero()],
+            ["Estudio", anime.getEstudio()],
+            ["Temporadas", str(anime.getTemporadas())],
+            ["Capítulos", str(anime.getCapitulos())],
+        ]
+
+        instrucciones = (
+            "Instrucciones para la extracción de datos:\n"
+            "\n"
+            "1. Seleccionar el anime en la base de datos.\n"
+            "\n"
+            "2. Obtener los detalles del anime, incluyendo su sinopsis, género, estudio de animación, temporadas y capítulos.\n"
+            "\n"
+            "3. Mostrar los resultados obtenidos en este informe para su análisis y uso posterior."
+        )
+
+        headers = ["Campo", "Valor"]
+
+        pdf = PDF3()
+        pdf.add_page()
+        pdf.add_title("Introducción")
+        pdf.body(introduccion)
+
+        pdf.add_title("Detalles del Anime")
+        pdf.ln(10) 
+        pdf.add_table(headers, detalles_anime)
+
+        pdf.add_page()
+        pdf.add_title("Instrucciones")
+        pdf.ln(10)
+        pdf.body(instrucciones)
+
+        try:
+            pdf.output('informe3.pdf', 'F')
+            QMessageBox.information(self, 'Información', '¡Informe 3 creado con éxito!')
+        except:
+            QMessageBox.critical(self, 'Error', '¡Error al crear el informe 3!')
+#_______________________________________________________________________________________________________________________
     def crearInforme4(self):
         # Conectar a la base de datos
         conn = sqlite3.connect('default.db')
