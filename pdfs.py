@@ -176,14 +176,36 @@ class PDF4(FPDF):
 
 class PDF5(FPDF):
     def header(self):
-        self.set_font('Times', '', 12)
+        
 
-    def body(self, body):
-        with open(body, 'rb') as fh:
-            txt = fh.read().decode('latin-1')
-        self.set_font('Times', '', 12)
-        self.multi_cell(0, 5, txt)
+        # Encabezado del PDF
+        self.set_font('Times', 'B', 16)
+        self.cell(0, 10, 'Informe de Géneros Compartidos', 0, 1, 'C')
+        self.ln(20)
+
+        self.image('LogoAnigiri.jpeg', x=10, y=10, w=30)
+        self.ln(10)
 
     def footer(self):
+        # Pie de página del PDF
+        self.set_y(-15)
+        self.set_font('Times', 'I', 8)
+        self.cell(0, 10, f'Página {self.page_no()}', 0, 0, 'C')
+
+    def chapter_body(self, text):
+        # Cuerpo de sección
         self.set_font('Times', '', 12)
-        self.cell(0, 10, 'Page ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
+        self.multi_cell(0, 10, text)
+        self.ln()
+
+    def create_table(self, headers, data, col_widths):
+        # Crear una tabla con fuente más pequeña
+        self.set_font('Times', 'B', 10)  # Fuente más pequeña para encabezados
+        for i, header in enumerate(headers):
+            self.cell(col_widths[i], 10, header, 1, 0, 'C')
+        self.ln()
+        self.set_font('Times', '', 8)  # Fuente más pequeña para datos
+        for row in data:
+            for i, item in enumerate(row):
+                self.cell(col_widths[i], 10, item, 1, 0, 'C')
+            self.ln()

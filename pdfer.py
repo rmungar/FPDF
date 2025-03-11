@@ -23,7 +23,7 @@ class Pdfer(QMainWindow):
         self.informe2Button.clicked.connect(self.crearInforme2)
         self.informe3Button.clicked.connect(self.crearInforme3)
         self.informe4Button.clicked.connect(self.crearInforme4)
-        ##self.informe5Button.clicked.connect(self.crearInforme5)
+        self.informe5Button.clicked.connect(self.crearInforme5)
 
     def crearInforme1(self):
         
@@ -287,17 +287,94 @@ class Pdfer(QMainWindow):
         except Exception as e:
             QMessageBox.critical(self, 'Error', f'¡Error al crear el informe 4! Detalles: {str(e)}')
 
-    ## def crearInforme5(self):
-    ##     body = "Resources\Pdfs\pdf5.md"
-    ##     pdf = PDF5()
-    ##     pdf.add_page()
-    ##     pdf.body(body)
-    ##     pdf.set_font('Times', '', 12)
-    ##     try:
-    ##         pdf.output('informe3.pdf', 'F')
-    ##         QMessageBox.information(self,'Información', '¡Informe 5 creado con éxito!') 
-    ##     except:
-    ##         QMessageBox.critical(self,'Error', '¡Error al crear el informe 5!')
+    def crearInforme5(self):
+        # Conectar a la base de datos
+        conn = sqlite3.connect('default.db')
+        cursor = conn.cursor()
+
+        # Consulta SQL
+        query = """
+        SELECT generos.genero, 
+            IFNULL(GROUP_CONCAT(DISTINCT a.nombre), 'N/A') AS animes, 
+            IFNULL(GROUP_CONCAT(DISTINCT m.nombre), 'N/A') AS mangas
+        FROM (
+            SELECT TRIM(value) AS genero, nombre
+            FROM ANIME
+            CROSS JOIN json_each('["' || REPLACE(genero, ', ', '","') || '"]')
+            UNION ALL
+            SELECT TRIM(value) AS genero, nombre
+            FROM MANGA
+            CROSS JOIN json_each('["' || REPLACE(genero, ', ', '","') || '"]')
+        ) AS generos
+        LEFT JOIN ANIME a ON generos.nombre = a.nombre
+        LEFT JOIN MANGA m ON generos.nombre = m.nombre
+        GROUP BY generos.genero;
+        """
+
+        cursor.execute(query)
+        datos_tabla = cursor.fetchall()
+
+        conn.close()
+
+        # Crear el PDF
+        pdf = PDF5()
+        pdf.add_page()
+
+        # Introducción
+        introduccion = (
+            "Este informe detalla los géneros compartidos entre animes y mangas. "
+            "Cada género listado contiene los animes y mangas que lo representan. "
+            "El objetivo es proporcionar una visión general de cómo los géneros "
+            "se distribuyen entre ambas categorías."
+        )
+        pdf.chapter_body(introduccion)
+        pdf.ln(10)
+
+        # Mostrar la consulta SQL
+        pdf.set_font('Times', 'B', 12)
+        pdf.cell(0, 10, 'Consulta SQL Utilizada:', 0, 1)
+        pdf.set_font('Times', '', 10)
+        pdf.multi_cell(0, 10, query)
+        pdf.ln(10)
+
+        # Explicación de la consulta
+        explicacion = (
+            "La consulta SQL divide los géneros de animes y mangas en filas separadas "
+            "utilizando `json_each`. Luego, agrupa los resultados por género y concatena "
+            "los nombres de los animes y mangas asociados a cada género. Si no hay animes "
+            "o mangas para un género, se muestra 'N/A'."
+        )
+        pdf.chapter_body(explicacion)
+        pdf.ln(10)
+
+        # Tabla de géneros
+        pdf.set_font('Times', 'B', 12)
+        pdf.cell(0, 10, 'Tabla de Géneros:', 0, 1)
+        pdf.create_table(
+            ["Género", "Animes", "Mangas"],
+            datos_tabla,
+            [50, 70, 70]  # Ajustar el ancho de las columnas
+        )
+        pdf.ln(10)
+
+        # Conclusión
+        pdf.set_font('Times', 'B', 12)
+        pdf.cell(0, 10, 'Conclusión:', 0, 1)
+        conclusion = (
+            "Este informe ha proporcionado un análisis detallado de los géneros "
+            "compartidos entre animes y mangas. Se han identificado los géneros "
+            "más comunes y se ha presentado un listado completo de animes y mangas "
+            "por género. La consulta SQL utilizada permite obtener estos datos de "
+            "manera eficiente y estructurada."
+        )
+        pdf.chapter_body(conclusion)
+
+        # Guardar el PDF
+        try:
+            pdf.output('informe5.pdf', 'F')
+            print("¡Informe 5 creado con éxito!")
+        except Exception as e:
+            print(f"Error al crear el informe 5: {str(e)}")
 
 
 
