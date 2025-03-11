@@ -86,7 +86,8 @@ class PDF2(FPDF):
         self.ln(5)
 
     def footer(self):
-        self.set_font('Arial', 'I', 8)
+        self.set_y(-15)
+        self.set_font('Arial', 'I', 10)
         self.set_text_color(128)
         self.cell(0, 10, 'Page ' + str(self.page_no()), 0, 0, 'R')
 

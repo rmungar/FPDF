@@ -92,8 +92,9 @@ class Pdfer(QMainWindow):
     def crearInforme2(self):
 
         email: str = "prueba@gmail.com"
-        anime: str = "Dragon Ball Z"
+        anime: str = "Naruto"
 
+        """
         usuario_repo = UsuarioRepo()
         usuario = usuario_repo.getUsuario(email)
         comentario_repo = ComentarioRepo()
@@ -103,35 +104,63 @@ class Pdfer(QMainWindow):
         for comentario in comentarios:
             if comentario._id.__contains__(anime):
                 resultado.append([comentario._id, comentario.usuario, comentario.texto, comentario.fecha])
+        """
+        
+
+        
+        conn = sqlite3.connect("default.db")
+        cursor = conn.cursor()
+#
+        query = """
+        SELECT c._id, c.usuario, c.texto, c.fecha 
+        FROM COMENTARIO c
+        JOIN USUARIO u ON c.usuario = u.email
+        WHERE u.email = ? AND c._id LIKE ?
+        """
+#
+        cursor.execute(query, (email, f"%-{anime}-%"))
+        resultado  = cursor.fetchall()
+        conn.close()
+
+        print(resultado)
 
         introduccion = (
-            "En este documento se detallará la forma de realizar una consulta a la tabla COMENTARIO, "
-            "con el objetivo de obtener la lista de comentarios realizados por un usuario en un anime específico. "
-            "La consulta se centrará en la relación entre la tabla de usuarios y la tabla de comentarios, "
-            "permitiendo así recuperar todos los comentarios realizados por un usuario sobre un anime determinado. "
+            "En este informe se explicará el proceso de consulta a la base de datos para obtener los comentarios "
+            "realizados por un usuario específico sobre un anime determinado. La consulta que se describe a continuación "
+            "permite obtener los comentarios de un usuario en función de un anime, utilizando la relación entre las tablas "
+            "de usuarios y comentarios dentro de una base de datos SQL.\n\n"
         )
 
         detalle_consulta = (
-            "Para hacer esta consulta, usamos el método `getComentariosByUser` del repositorio de comentarios, "
-            "que nos da todos los comentarios hechos por un usuario en específico. Después, aplicamos un filtro "
-            "para quedarnos solo con los comentarios que están relacionados con el anime que nos interesa. "
-            "Los datos que usamos para la consulta fueron:\n\n"
-            f"- **Email del usuario:** {email}\n"
-            f"- **Nombre del anime:** {anime}\n\n"
-            "**Cómo funciona:**\n"
-            "El método `getComentariosByUser` busca, a través de esta consulta: SELECT * FROM COMENTARIO WHERE USUARIO = ?, todos los comentarios que ha hecho el usuario con el email que le pasamos. "
-            "Luego, filtramos esos comentarios para quedarnos solo con los que tienen el nombre del anime en su identificador (`_id`). "
-            "Esta forma de hacerlo es eficiente y nos permite encontrar rápidamente los comentarios de un usuario sobre un anime en particular."
+            "La consulta SQL realizada está diseñada para filtrar los comentarios hechos por un usuario sobre un anime específico. "
+        "En primer lugar, la consulta establece una relación entre las tablas COMENTARIO y USUARIO a través de un JOIN, "
+        "basado en el campo 'usuario' de la tabla COMENTARIO, que coincide con el campo 'email' de la tabla USUARIO. "
+        "A continuación, se aplica un filtro para asegurar que los comentarios sean aquellos realizados por el usuario "
+        "con el email proporcionado y que el identificador del comentario (_id) contenga el nombre del anime, en este caso 'Naruto'.\n\n"
+        "Los datos que se usan en esta consulta son los siguientes:\n"
+        f"- Email del usuario: {email}\n"
+        f"- Nombre del anime: {anime}\n"
+        "\nConsulta SQL utilizada:\n"
+            "```sql\n"
+            "SELECT c._id, c.usuario, c.texto, c.fecha\n"
+            "FROM COMENTARIO c\n"
+            "JOIN USUARIO u ON c.usuario = u.email\n"
+            "WHERE u.email = ? AND c._id LIKE ?\n"
+        )
+
+        resultado_detallado = (
+            "El resultado de la consulta consiste en una lista de comentarios que cumplen con los criterios especificados. "
+            "Cada registro incluye el identificador del comentario, el usuario que lo realizó, el texto del comentario y la fecha en "
+            "que fue publicado. A continuación, se presentan los resultados obtenidos de la consulta:\n\n"
         )
 
         conclusion = (
-            "En resumen, este informe muestra cómo buscamos y filtramos los comentarios que el usuario '{email}' "
-            f"ha hecho sobre el anime '{anime}'. Usamos el método `getComentariosByUser` para obtener todos sus comentarios "
-            "y luego aplicamos un filtro para seleccionar solo los que están relacionados con este anime.\n\n"
-            "Este método es práctico porque reutiliza la lógica del repositorio, lo que hace que el código sea más fácil de mantener "
-            "y ampliar en el futuro. Los resultados que obtuvimos se presentan en este informe, lo que nos ayuda a entender mejor "
-            "cómo interactúa el usuario con el contenido de la plataforma. Esta información es útil para tomar decisiones "
-            "que mejoren la experiencia de los usuarios."
+            f"Este informe ha ilustrado el proceso de obtener los comentarios realizados por el usuario '{email}' sobre el anime '{anime}'. "
+            "Mediante una consulta SQL bien estructurada, hemos logrado filtrar los registros de manera eficiente, asegurando que solo se "
+            "recuperen los datos pertinentes. El uso del JOIN entre las tablas COMENTARIO y USUARIO y la condición LIKE en el campo _id "
+            "permite realizar una búsqueda precisa, lo cual facilita el análisis de las interacciones del usuario con el contenido de anime.\n\n"
+            "Es importante destacar que este enfoque puede adaptarse fácilmente a otros escenarios y tipos de consultas, "
+            "siendo una solución versátil y escalable para la gestión y análisis de datos en bases de datos relacionales."
         )
 
         headers = ["Id", "Usuario", "Texto", "Fecha"]
@@ -144,9 +173,11 @@ class Pdfer(QMainWindow):
         pdf.add_title("Detalles consulta")
         pdf.body(detalle_consulta)
 
-        pdf.add_title("Resultado de la consulta")
-        pdf.add_results(headers, resultado)
+        pdf.add_title("Resultado de la Consulta")
+        pdf.body(resultado_detallado)
+        pdf.add_results(headers, resultado) 
 
+        pdf.add_page
         pdf.add_title("Conclusión")
         pdf.body(conclusion)
             
