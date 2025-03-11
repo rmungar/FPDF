@@ -18,6 +18,7 @@ class Pdfer(QMainWindow):
         super(Pdfer, self).__init__() # Reservamos un espacio en memoria para la clase
         print(basedir)
         uic.loadUi(f'{basedir}/Ui/informes.ui',self)
+        self.setWindowTitle("Informes")
 
         self.informe1Button.clicked.connect(self.crearInforme1)
         self.informe2Button.clicked.connect(self.crearInforme2)

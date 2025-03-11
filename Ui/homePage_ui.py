@@ -489,10 +489,10 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.label, 0, 1, 2, 1)
 
-        self.pushButton = QPushButton(self.centralwidget)
-        self.pushButton.setObjectName(u"pushButton")
+        self.informesButton = QPushButton(self.centralwidget)
+        self.informesButton.setObjectName(u"informesButton")
 
-        self.gridLayout.addWidget(self.pushButton, 9, 1, 1, 1)
+        self.gridLayout.addWidget(self.informesButton, 9, 1, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -525,6 +525,6 @@ class Ui_MainWindow(object):
         self.userButton.setText("")
         self.animeButton.setText(QCoreApplication.translate("MainWindow", u"Animes", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Anigiri</p></body></html>", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Informes", None))
+        self.informesButton.setText(QCoreApplication.translate("MainWindow", u"Informes", None))
     # retranslateUi
 

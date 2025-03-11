@@ -26,6 +26,8 @@ from Repository.usuarioRepo import UsuarioRepo
 from Repository.comentarioRepo import ComentarioRepo
 from datetime import date
 
+from pdfer import Pdfer
+
 basedir = os.path.dirname(__file__)
 
 config = {
@@ -879,6 +881,7 @@ class HomeScreen(QMainWindow):
         self.mangaButton.clicked.connect(lambda: self.toAllMangaPage())
         self.mangakaButton.clicked.connect(lambda: self.toAllMangakaPage())
         self.estudioButton.clicked.connect(lambda: self.toAllEstudioPage())
+        self.informesButton.clicked.connect(lambda: self.showInformesWindow())
 
         usuarioRepo = UsuarioRepo()
         mangaRepo = MangaRepo()
@@ -997,7 +1000,12 @@ class HomeScreen(QMainWindow):
     def toUserScreen(self):
         userScreen = UserScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(userScreen)
-        stacked_widget.setCurrentWidget(userScreen)    
+        stacked_widget.setCurrentWidget(userScreen) 
+
+    def showInformesWindow(self):
+        """Muestra la pantalla de los informes en una ventana distinta"""
+        self.informes_window = Pdfer()
+        self.informes_window.show()
 
 class FormularioEmergente(QDialog):
     def __init__(self):
