@@ -107,8 +107,6 @@ class Pdfer(QMainWindow):
                 resultado.append([comentario._id, comentario.usuario, comentario.texto, comentario.fecha])
         """
         
-
-        
         conn = sqlite3.connect("default.db")
         cursor = conn.cursor()
 #
@@ -246,7 +244,7 @@ class Pdfer(QMainWindow):
         try:
             pdf.output('informe3.pdf', 'F')
             QMessageBox.information(self, 'Información', '¡Informe 3 creado con éxito!')
-        except:
+        except Exception as e:
             QMessageBox.critical(self, 'Error', '¡Error al crear el informe 3!')
 
 
@@ -404,9 +402,9 @@ class Pdfer(QMainWindow):
         # Guardar el PDF
         try:
             pdf.output('informe5.pdf', 'F')
-            print("¡Informe 5 creado con éxito!")
+            QMessageBox.information(self, 'Información', '¡Informe 5 creado con éxito!')
         except Exception as e:
-            print(f"Error al crear el informe 5: {str(e)}")
+            QMessageBox.critical(self, 'Error', f'¡Error al crear el informe 5! Detalles: {str(e)}')
 
 
 
